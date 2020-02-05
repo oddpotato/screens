@@ -60,8 +60,8 @@
     const $event = document.querySelector('.event');
     const $eventTime = document.querySelector('.event-time');
     async function updateEvent() {
-        const { events } = await getJSON(`https://lcpt-api.herokuapp.com/api/college.json`);
-        const nextEvent = events.futureEvents.reverse()[0];
+        const futureEvents = await getJSON(`https://lcpt-api.herokuapp.com/api/upcomingEvents.json`);
+        const nextEvent = futureEvents.reverse()[0];
         $event.textContent = nextEvent.summary;
 
         const eDate = (new Date(nextEvent.start));
