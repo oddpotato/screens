@@ -60,8 +60,22 @@
     const $event = document.querySelector('.event');
     const $eventTime = document.querySelector('.event-time');
     async function updateEvent() {
+        const _nextEvent = localStorage.nextEvent && JSON.parse(localStorage.nextEvent);
+        if (_nextEvent) {
+            const nextEvent = _nextEvent; // yuk
+            localStorage.nextEvent = JSON.stringify(nextEvent);
+            $event.textContent = nextEvent.summary;
+
+            const eDate = (new Date(nextEvent.start));
+            const eventDate = eDate.toLocaleDateString().slice(0, -5);
+            const eventTime = eDate.toLocaleTimeString().split(':').slice(0, -1).join(':');
+            $eventTime.textContent = eventDate + ' ' + eventTime;
+        }
+
         const futureEvents = await getJSON(`https://lcpt-api.herokuapp.com/api/upcomingEvents.json`);
         const nextEvent = futureEvents.reverse()[0];
+
+        localStorage.nextEvent = JSON.stringify(nextEvent);
         $event.textContent = nextEvent.summary;
 
         const eDate = (new Date(nextEvent.start));
