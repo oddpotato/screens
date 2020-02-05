@@ -72,8 +72,7 @@
             $eventTime.textContent = eventDate + ' ' + eventTime;
         }
 
-        const futureEvents = await getJSON(`https://lcpt-api.herokuapp.com/api/upcomingEvents.json`);
-        const nextEvent = futureEvents.reverse()[0];
+        const [nextEvent] = await getJSON(`https://lcpt-api.herokuapp.com/api/upcomingEvents.json`);
 
         localStorage.nextEvent = JSON.stringify(nextEvent);
         $event.textContent = nextEvent.summary;
