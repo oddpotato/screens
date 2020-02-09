@@ -1,20 +1,22 @@
 
-const urls = [
-    "./dashboard.html",
-    "./joe.html",
-    "https://electiontechhandbook.uk",
-    "./ration-club.html",
-    "https://hackthepress.org",
-    "./vlad.html",
-    "https://gdes.app",
-    "./scribe.html",
-    "./ration-club.html",
-    "./sheezy.html",
-    "https://gived.org",
-    "./mutual-dislike.html",
-    "https://www.lajones21.com/4dpong",
-    "./ration-club.html"
-];
+const defaultIndex = 0,
+      defaultPeriod = 0,
+      urls = [
+          "./dashboard.html",
+          "./joe.html",
+          "https://electiontechhandbook.uk",
+          "./ration-club.html",
+          "https://hackthepress.org",
+          "./vlad.html",
+          "https://gdes.app",
+          "./scribe.html",
+          "./ration-club.html",
+          "./sheezy.html",
+          "https://gived.org",
+          "./mutual-dislike.html",
+          "https://www.lajones21.com/4dpong",
+          "./ration-club.html"
+      ];
 
 // Schedule the page to refresh in an hour (ensures screens pull latest update to codebase)
 setTimeout(() => {
@@ -39,9 +41,9 @@ function getURLParam(parameter) {
 function initialize() {
     let timeoutPeriod = getURLParam("period");
     if (timeoutPeriod === null || timeoutPeriod === "") {
-        timeoutPeriod = 30;
+        timeoutPeriod = defaultPeriod;
     }
-    index = 0;
+    index = defaultIndex;
     let targetURL = getURLParam("url");
     if (targetURL === null || targetURL === "") {
         const givenIndex = getURLParam("index");
