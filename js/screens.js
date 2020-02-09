@@ -23,14 +23,37 @@ setTimeout(() => {
 
 let index = 0;
 
-function updateIframe() {
-    const iframe = document.querySelector("iframe"),
-          newIndex = (index + 1) % urls.length,
-          url = urls[index];
-    index = newIndex;
-    iframe.setAttribute("src", url);
+function setIframe(url) {
+    document.querySelector("iframe").setAttribute("src", url);
 }
 
-setInterval(updateIframe, 1000 * 30);
+function updateIframe() {
+    index = (index + 1) % urls.length;
+    setIframe(urls[index]);
+}
 
-updateIframe();
+function getURLParam(parameter) {
+    return new URLSearchParams(window.location.search).get(parameter);
+}
+
+function initialize() {
+    let timeoutPeriod = getURLParam("period");
+    if (timeoutPeriod === null || timeoutPeriod === "") {
+        timeoutPeriod = 30;
+    }
+    index = 0;
+    let targetURL = getURLParam("url");
+    if (targetURL === null || targetURL === "") {
+        const givenIndex = getURLParam("index");
+        if (givenIndex !== null && givenIndex !== "" && givenIndex >= 0) {
+            index = givenIndex % urls.length;
+        }
+        targetURL = urls[index];
+    }
+    if (timeoutPeriod > 0) {
+        setInterval(updateIframe, timeoutPeriod * 1000);
+    }
+    setIframe(targetURL);
+}
+
+initialize();
