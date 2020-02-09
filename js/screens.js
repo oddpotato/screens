@@ -1,5 +1,5 @@
 
-var urls = [
+const urls = [
     "./dashboard.html",
     "./joe.html",
     "https://electiontechhandbook.uk",
@@ -13,7 +13,7 @@ var urls = [
     "https://gived.org",
     "./mutual-dislike.html",
     "https://www.lajones21.com/4dpong",
-    "./ration-club.html",
+    "./ration-club.html"
 ];
 
 // Schedule the page to refresh in an hour (ensures screens pull latest update to codebase)
@@ -21,12 +21,12 @@ setTimeout(() => {
     location.reload();
 }, 60 * 60 * 1000);
 
-var index = 0;
+let index = 0;
 
 function updateIframe() {
-    var iframe = document.querySelector("iframe");
-    var newIndex = (index + 1) % urls.length;
-    var url = urls[index];
+    const iframe = document.querySelector("iframe"),
+          newIndex = (index + 1) % urls.length,
+          url = urls[index];
     index = newIndex;
     iframe.setAttribute("src", url);
 }
