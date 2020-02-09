@@ -5,60 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Major+Mono+Display">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    <link rel="stylesheet" type="text/css" href="./css/screens.css">
     <title>Newspeak Screens</title>
 </head>
 
 <body>
     <iframe src="" frameborder="0"></iframe>
+
+    <script src="./js/screens.js"></script>
 </body>
-
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    iframe {
-        border: none;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-
-<script>
-    var urls = [
-        './dashboard.html'
-        // './joe.html',
-        // 'https://electiontechhandbook.uk',
-        // './ration-club.html',
-        // 'https://hackthepress.org',
-        // './vlad.html',
-        // 'https://gdes.app',
-        // './scribe.html',
-        // './ration-club.html',
-        // './sheezy.html',
-        // 'https://gived.org',
-        // './mutual-dislike.html',
-        // 'https://www.lajones21.com/4dpong',
-        // './ration-club.html',
-    ];
-    var index = 0;
-    function updateIframe() {
-        var iframe = document.querySelector('iframe');
-        var newIndex = (index + 1) % urls.length;
-        var url = urls[index];
-        index = newIndex;
-        iframe.setAttribute('src', url);
-    }
-    // setInterval(updateIframe, 1000 * 30);
-
-    updateIframe();
-
-    setTimeout(function () {
-        location.reload();
-    }, 1000 * 60 * 60);
-</script>
 
 </html>

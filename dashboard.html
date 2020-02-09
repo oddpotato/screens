@@ -2,96 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Major+Mono+Display">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
     <title>NWSPK Dashboard</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <style>
-        body {
-            font-family: 'Major Mono Display', monospace;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            font-size: 10vw;
-        }
-
-        h2 {
-            font-size: 5vw;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            text-align: center;
-        }
-
-        .event {
-            background: #000;
-            ;
-            color: #fff;
-        }
-    </style>
-    <h2>Next Event is<br /><span class='event'></span><br />@ <span class="event-time"></span></h2>
+    <h2>Next Event is<br /><span class="event"></span><br />@ <span class="event-time"></span></h2>
     <h2>Welcome to Newspeak House</h2>
     <h1 class="time"></h1>
 </body>
 
-<script>
-
-    function getJSON(url) {
-        return fetch(url).then(r => r.json());
-    }
-
-    const $event = document.querySelector('.event');
-    const $eventTime = document.querySelector('.event-time');
-    async function updateEvent() {
-        const _nextEvent = localStorage.nextEvent && JSON.parse(localStorage.nextEvent);
-        if (_nextEvent) {
-            const nextEvent = _nextEvent; // yuk
-            localStorage.nextEvent = JSON.stringify(nextEvent);
-            $event.textContent = nextEvent.summary;
-
-            const eDate = (new Date(nextEvent.start));
-            const eventDate = eDate.toLocaleDateString().slice(0, -5);
-            const eventTime = eDate.toLocaleTimeString().split(':').slice(0, -1).join(':');
-            $eventTime.textContent = eventDate + ' ' + eventTime;
-        }
-
-        const [nextEvent] = await getJSON(`https://lcpt-api.herokuapp.com/api/upcomingEvents.json`);
-
-        localStorage.nextEvent = JSON.stringify(nextEvent);
-        $event.textContent = nextEvent.summary;
-
-        const eDate = (new Date(nextEvent.start));
-        const eventDate = eDate.toLocaleDateString().slice(0, -5);
-        const eventTime = eDate.toLocaleTimeString().split(':').slice(0, -1).join(':');
-        $eventTime.textContent = eventDate + ' ' + eventTime;
-    }
-    updateEvent();
-
-    const $time = document.querySelector('.time');
-    function updateTime() {
-        const d = new Date();
-        const timeString = d.toLocaleTimeString().split(':').slice(0, -1).join(':');
-        $time.textContent = timeString;
-    }
-    setInterval(updateTime, 5000);
-    updateTime();
-</script>
+<script type="text/javascript" src="./js/dashboard.js"></script>
 
 </html>
