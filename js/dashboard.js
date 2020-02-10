@@ -4,30 +4,26 @@ function getJSON(url) {
 }
 
 const $event = document.querySelector(".event"),
+      $eventDate = document.querySelector(".event-date"),
       $eventTime = document.querySelector(".event-time");
 
+function setEventDetails(eventObject) {
+    localStorage.nextEvent = JSON.stringify(eventObject);
+    $event.textContent = eventObject.summary;
+    const eventDateTime = (new Date(eventObject.start)),
+          eventDate = eventDateTime.toLocaleDateString().slice(0, -5),
+          eventTime = eventDateTime.toLocaleTimeString().split(":").slice(0, -1).join(":");
+    $eventDate.textContent = eventDate;
+    $eventTime.textContent = eventTime;
+}
+
 async function updateEvent() {
-    const _nextEvent = localStorage.nextEvent && JSON.parse(localStorage.nextEvent);
-    if (_nextEvent) {
-        const nextEvent = _nextEvent; // Yuk
-        localStorage.nextEvent = JSON.stringify(nextEvent);
-        $event.textContent = nextEvent.summary;
-
-        const eDate = (new Date(nextEvent.start)),
-              eventDate = eDate.toLocaleDateString().slice(0, -5),
-              eventTime = eDate.toLocaleTimeString().split(":").slice(0, -1).join(":");
-        $eventTime.textContent = eventDate + " " + eventTime;
+    const loadedNextEvent = localStorage.nextEvent && JSON.parse(localStorage.nextEvent);
+    if (loadedNextEvent) {
+        setEventDetails(loadedNextEvent);
     }
-
     const [ nextEvent ] = await getJSON("https://lcpt-api.herokuapp.com/api/upcomingEvents.json");
-
-    localStorage.nextEvent = JSON.stringify(nextEvent);
-    $event.textContent = nextEvent.summary;
-
-    const eDate = (new Date(nextEvent.start)),
-          eventDate = eDate.toLocaleDateString().slice(0, -5),
-          eventTime = eDate.toLocaleTimeString().split(":").slice(0, -1).join(":");
-    $eventTime.textContent = eventDate + " " + eventTime;
+    setEventDetails(nextEvent);
 }
 
 updateEvent();
