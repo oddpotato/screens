@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display");
+
 body,
 img {
-    font-family: 'Major Mono Display', monospace;
+    font-family: "Major Mono Display", monospace;
     width: 100%;
     height: 100%;
     position: absolute;

@@ -1,0 +1,51 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3860126, 2020-01-27T05:31:35-0500
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: ClarendonBTWXX-Light by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/light-148722/
+ *
+ * Webfont: ClarendonBTWXX-Roman by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/roman-148722/
+ *
+ * Webfont: ClarendonBTWXX-Bold by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/bold-148722/
+ *
+ * Webfont: ClarendonBTWXX-Heavy by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/heavy-148722/
+ *
+ * Webfont: ClarendonBTWXX-Black by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/black-148722/
+ *
+ * Webfont: ClarendonBTWXX-Condensed by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/condensed-148722/
+ *
+ * Webfont: ClarendonBTWXX-BoldCond by Bitstream
+ * URL: https://www.myfonts.com/fonts/bitstream/clarendon/bold-condensed-148722/
+ *
+ *
+ * Licensed pageviews: 30,000
+ * Webfonts copyright: Copyright &#x00A9; 2015 Monotype Imaging Inc. All rights reserved.
+ *
+ * © 2020 MyFonts Inc
+*/
+
+@font-face {font-family: 'ClarendonBTWXX-Light';src: url('../fonts/3AE69E_0_0.eot');src: url('../fonts/3AE69E_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_0_0.woff2') format('woff2'),url('../fonts/3AE69E_0_0.woff') format('woff'),url('../fonts/3AE69E_0_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-Roman';src: url('../fonts/3AE69E_1_0.eot');src: url('../fonts/3AE69E_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_1_0.woff2') format('woff2'),url('../fonts/3AE69E_1_0.woff') format('woff'),url('../fonts/3AE69E_1_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-Bold';src: url('../fonts/3AE69E_2_0.eot');src: url('../fonts/3AE69E_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_2_0.woff2') format('woff2'),url('../fonts/3AE69E_2_0.woff') format('woff'),url('../fonts/3AE69E_2_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-Heavy';src: url('../fonts/3AE69E_3_0.eot');src: url('../fonts/3AE69E_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_3_0.woff2') format('woff2'),url('../fonts/3AE69E_3_0.woff') format('woff'),url('../fonts/3AE69E_3_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-Black';src: url('../fonts/3AE69E_4_0.eot');src: url('../fonts/3AE69E_4_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_4_0.woff2') format('woff2'),url('../fonts/3AE69E_4_0.woff') format('woff'),url('../fonts/3AE69E_4_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-Condensed';src: url('../fonts/3AE69E_5_0.eot');src: url('../fonts/3AE69E_5_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_5_0.woff2') format('woff2'),url('../fonts/3AE69E_5_0.woff') format('woff'),url('../fonts/3AE69E_5_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ClarendonBTWXX-BoldCond';src: url('../fonts/3AE69E_6_0.eot');src: url('../fonts/3AE69E_6_0.eot?#iefix') format('embedded-opentype'),url('../fonts/3AE69E_6_0.woff2') format('woff2'),url('../fonts/3AE69E_6_0.woff') format('woff'),url('../fonts/3AE69E_6_0.ttf') format('truetype');}

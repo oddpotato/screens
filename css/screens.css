@@ -1,3 +1,7 @@
+@import url("https://lcpt-website.netlify.com/fonts.css");
+
+@import "./default.css";
+
 body {
     margin: 0;
     padding: 0;
