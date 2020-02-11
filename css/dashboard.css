@@ -1,0 +1,20 @@
+@import "./default.css";
+@import "./fonts.css";
+
+body,
+img {
+    font-family: "ClarendonBTWXX-Bold";
+}
+
+h1 {
+    font-size: 10vw;
+}
+
+h2 {
+    font-size: 5vw;
+}
+
+.event {
+    background: #000;
+    color: #fff;
+}

@@ -1,0 +1,15 @@
+@import url("https://lcpt-website.netlify.com/fonts.css");
+
+@import "./default.css";
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+iframe {
+    border: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

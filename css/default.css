@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display");
+
+body,
+img {
+    font-family: "Major Mono Display", monospace;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 5vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    text-align: center;
+}
