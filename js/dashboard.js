@@ -1,6 +1,7 @@
 
-function getJSON(url) {
-    return fetch(url).then((response) => response.json());
+async function getJSON(url) {
+    const response = await fetch(url);
+    return await response.json();
 }
 
 const $event = document.querySelector(".event"),
@@ -9,7 +10,6 @@ const $event = document.querySelector(".event"),
 function setEventDetails(eventObject) {
     localStorage.nextEvent = JSON.stringify(eventObject);
     $event.textContent = eventObject.summary;
-    console.log(JSON.stringify(eventObject));
     const daysPerMillisecond = 1 / (1000 * 60 * 60 * 24),
           nowDateTime = Date.now(),
           startDateTime = new Date(eventObject.start),
@@ -18,9 +18,11 @@ function setEventDetails(eventObject) {
             - parseInt(nowDateTime * daysPerMillisecond, 10),
           startDate = startDateTime.toLocaleDateString().slice(0, -5),
           startTime = startDateTime.toLocaleTimeString().split(":").slice(0, -1).join(":");
-
+    // By default, list the date and time of the event
     let eventTimeString = startDate + " at " + startTime;
+    // Set up an indexable list of day names
     const days = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+    // If a more specific time can be given
     if (relativeDays < 7) {
         if (relativeDays > 1) {
             // The event is happening within a week
@@ -36,7 +38,7 @@ function setEventDetails(eventObject) {
                 // Event is happening within 4 hours, but in more than 1 hour
                 const hours = parseInt(relativeMillis / (1000 * 60 * 60), 10);
                 eventTimeString = "in " + hours + " hour" + (hours > 1 ? "s" : "");
-                setTimeout(() => {
+                setTimeout(function() {
                     // Update the display of the event details (without re-requesting the event)
                     setEventDetails(eventObject);
                 }, (hours > 1 ? 1000 * 60 * 60 : relativeMillis - (1000 * 60 * 60)));
@@ -44,7 +46,7 @@ function setEventDetails(eventObject) {
                 const minutes = parseInt(relativeMillis / (1000 * 60), 10);
                 if (minutes > 0) {
                     eventTimeString = "in " + minutes + " minute" + (minutes > 1 ? "s" : "");
-                    setTimeout(() => {
+                    setTimeout(function() {
                         // Update the display of the event details (without re-requesting the event)
                         setEventDetails(eventObject);
                     }, 1000 * 60);

@@ -170,7 +170,7 @@
         "eol-last": "error",
         "func-call-spacing": "error",
         "func-name-matching": "off",
-        "func-names": "error",
+        "func-names": "off",
         "func-style": [
             "error",
             "declaration"
@@ -333,7 +333,7 @@
         "no-useless-rename": "error",
         "no-var": "error",
         "object-shorthand": "error",
-        "prefer-arrow-callback": "error",
+        "prefer-arrow-callback": "off",
         "prefer-const": "error",
         "prefer-destructuring": "off",
         "prefer-numeric-literals": "error",
