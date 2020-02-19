@@ -4,17 +4,33 @@ async function getJSON(url) {
     return await response.json();
 }
 
+function eventIsValid(eventObject) {
+    return eventObject && eventObject.summary;
+}
+
+function eventIsCancelled(eventObject) {
+    return !eventIsValid(eventObject) || eventObject.summary.includes("[CANCELLED]");
+}
+
 const $event = document.querySelector(".event"),
       $eventTime = document.querySelector(".event-time");
 
 function setEventDetails(eventObject) {
-    if (!eventObject) {
+    if (!eventIsValid(eventObject)) {
         $event.textContent = "not yet scheduled";
         $eventTime.textContent = "please stand by";
         return;
     }
     localStorage.nextEvent = JSON.stringify(eventObject);
     $event.textContent = eventObject.summary;
+    if (!eventObject.start) {
+        if (eventIsCancelled(eventObject)) {
+            $eventTime.textContent = "not happening";
+        } else {
+            $eventTime.textContent = "happening soon";
+        }
+        return;
+    }
     const daysPerMillisecond = 1 / (1000 * 60 * 60 * 24),
           nowDateTime = Date.now(),
           startDateTime = new Date(eventObject.start),
@@ -24,7 +40,8 @@ function setEventDetails(eventObject) {
           startDate = startDateTime.toLocaleDateString().slice(0, -5),
           startTime = startDateTime.toLocaleTimeString().split(":").slice(0, -1).join(":");
     // By default, list the date and time of the event
-    let eventTimeString = startDate + " at " + startTime;
+    let eventTimeString = startDate + " at " + startTime,
+        pastTenseString = "no longer ";
     $eventTime.textContent = eventTimeString;
     // Set up an indexable list of day names
     const days = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
@@ -37,17 +54,16 @@ function setEventDetails(eventObject) {
             // The event is happening tomorrow
             eventTimeString = "tomorrow at " + startTime;
         } else if (relativeDays <= 0) {
-            if (relativeMillis > 1000 * 60 * 60 * 4) {
-                // Event is happening today (in more than 4 hours)
+            if (relativeMillis > 1000 * 60 * 60 * 2) {
+                // Event is happening today (in more than 2 hours)
                 eventTimeString = "today at " + startTime;
             } else if (relativeMillis >= 1000 * 60 * 60) {
-                // Event is happening within 4 hours, but in more than 1 hour
-                const hours = parseInt(relativeMillis / (1000 * 60 * 60), 10);
-                eventTimeString = "in " + hours + " hour" + (hours > 1 ? "s" : "");
+                // Event is happening in 1-2 hours
+                eventTimeString = "today at " + startTime;
                 setTimeout(function() {
                     // Update the display of the event details (without re-requesting the event)
                     setEventDetails(eventObject);
-                }, (hours > 1 ? 1000 * 60 * 60 : relativeMillis - (1000 * 60 * 60)));
+                }, relativeMillis - (1000 * 60 * 60));
             } else {
                 const minutes = parseInt(relativeMillis / (1000 * 60), 10);
                 if (minutes > 0) {
@@ -58,13 +74,26 @@ function setEventDetails(eventObject) {
                     }, 1000 * 60);
                 } else if (new Date(eventObject.end) - nowDateTime < 0) {
                     eventTimeString = "this event has finished";
+                    if (eventIsCancelled(eventObject)) {
+                        eventTimeString = "this event would have finished ";
+                        pastTenseString = "";
+                    }
                 } else {
                     eventTimeString = "it's happening now!";
+                    if (eventIsCancelled(eventObject)) {
+                        eventTimeString = "would have been happening now!";
+                        pastTenseString = "";
+                    }
                 }
             }
         }
+    } else {
+        pastTenseString = "no longer on ";
     }
     $eventTime.textContent = eventTimeString;
+    if (eventIsCancelled(eventObject)) {
+        $eventTime.textContent = pastTenseString + $eventTime.textContent;
+    }
 }
 
 async function updateEvent() {
@@ -79,7 +108,7 @@ async function updateEvent() {
     do {
         eventIndex++;
         nextEvent = upcomingEvents[eventIndex];
-    } while (eventIndex < upcomingEvents.length && nextEvent.summary.includes("[CANCELLED]"));
+    } while (eventIndex < upcomingEvents.length && !eventIsValid(nextEvent));
     if (eventIndex < upcomingEvents.length) {
         setEventDetails(nextEvent);
     } else {
