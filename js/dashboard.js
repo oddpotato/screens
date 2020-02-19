@@ -8,6 +8,11 @@ const $event = document.querySelector(".event"),
       $eventTime = document.querySelector(".event-time");
 
 function setEventDetails(eventObject) {
+    if (!eventObject) {
+        $event.textContent = "not yet scheduled";
+        $eventTime.textContent = "please stand by";
+        return;
+    }
     localStorage.nextEvent = JSON.stringify(eventObject);
     $event.textContent = eventObject.summary;
     const daysPerMillisecond = 1 / (1000 * 60 * 60 * 24),
@@ -63,12 +68,23 @@ function setEventDetails(eventObject) {
 }
 
 async function updateEvent() {
-    const loadedNextEvent = localStorage.nextEvent && JSON.parse(localStorage.nextEvent);
+    const loadedNextEvent = localStorage.nextEvent && localStorage.nextEvent !== "undefined"
+        && JSON.parse(localStorage.nextEvent);
     if (loadedNextEvent) {
         setEventDetails(loadedNextEvent);
     }
-    const [ nextEvent ] = await getJSON("https://lcpt-api.herokuapp.com/api/upcomingEvents.json");
-    setEventDetails(nextEvent);
+    const upcomingEvents = await getJSON("https://lcpt-api.herokuapp.com/api/upcomingEvents.json");
+    let eventIndex = -1,
+        nextEvent;
+    do {
+        eventIndex++;
+        nextEvent = upcomingEvents[eventIndex];
+    } while (eventIndex < upcomingEvents.length && nextEvent.summary.includes("[CANCELLED]"));
+    if (eventIndex < upcomingEvents.length) {
+        setEventDetails(nextEvent);
+    } else {
+        setEventDetails();
+    }
 }
 
 updateEvent();
