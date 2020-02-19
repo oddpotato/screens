@@ -20,6 +20,7 @@ function setEventDetails(eventObject) {
           startTime = startDateTime.toLocaleTimeString().split(":").slice(0, -1).join(":");
     // By default, list the date and time of the event
     let eventTimeString = startDate + " at " + startTime;
+    $eventTime.textContent = eventTimeString;
     // Set up an indexable list of day names
     const days = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
     // If a more specific time can be given
