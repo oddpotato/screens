@@ -102,7 +102,16 @@ async function updateEvent() {
     if (loadedNextEvent) {
         setEventDetails(loadedNextEvent);
     }
-    const upcomingEvents = await getJSON("https://lcpt-api.herokuapp.com/api/upcomingEvents.json");
+
+    var jsonLocation
+    console.log(location.hostname)
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        jsonLocation = "/data/samples/upcomingEvents.json"
+    } else {
+        jsonLocation = "https://lcpt-api.herokuapp.com/api/upcomingEvents.json"
+    }
+
+    const upcomingEvents = await getJSON(jsonLocation);
     let eventIndex = -1,
         nextEvent;
     do {

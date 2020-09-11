@@ -1,0 +1,20 @@
+[
+    {
+        "type": "VEVENT",
+        "params": [],
+        "dtstamp": "2020-09-11T20:18:58.000Z",
+        "uid": "abc123",
+        "start": "2020-09-12T17:00:00.000Z",
+        "end": "2020-09-12T21:00:00.000Z",
+        "description": "Long Event Description",
+        "location": "Newspeak House, 133 Bethnal Green Road, London, E2 7DG, UK",
+        "organizer": {
+            "params": {
+                "CN": "Some Person"
+            },
+            "val": "mailto:info@lala"
+        },
+        "summary": "An event with some cool name: London Edition",
+        "url": "https://https://nwspk.com/"
+    }
+]
