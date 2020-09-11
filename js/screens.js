@@ -1,21 +1,25 @@
 
 const defaultIndex = 0,
-      defaultPeriod = 0,
+      defaultPeriod = 10,
       urls = [
           "./dashboard.html",
+          "https://www.wbstack.com",
+          "./dashboard.html",
+          "./bones.html",
+          "./dashboard.html",
           "./joe.html",
-          "https://electiontechhandbook.uk",
-          "./ration-club.html",
-          "https://hackthepress.org",
-          "./vlad.html",
-          "https://gdes.app",
-          "./scribe.html",
-          "./ration-club.html",
-          "./sheezy.html",
-          "https://gived.org",
-          "./mutual-dislike.html",
-          "https://www.lajones21.com/4dpong",
-          "./ration-club.html"
+          //"https://electiontechhandbook.uk",
+          //"./ration-club.html",
+          //"https://hackthepress.org",
+          //"./vlad.html",
+          //"https://gdes.app",
+          //"./scribe.html",
+          //"./ration-club.html",
+          //"./sheezy.html",
+          //"https://gived.org",
+          //"./mutual-dislike.html",
+          //"https://www.lajones21.com/4dpong",
+          //"./ration-club.html"
       ];
 
 // Schedule the page to refresh in an hour (ensures screens pull latest update to codebase)
