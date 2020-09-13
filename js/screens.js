@@ -31,11 +31,12 @@ setTimeout(() => {
 function msToNextQuarterHourForRefresh(){
     var nextQuarter = new Date();
     var quarterHours = Math.ceil(nextQuarter.getMinutes()/15);
-    if ( quarterHours == 4) {
+    var nextQuarterHours = quarterHours + 1
+    if ( nextQuarterHours >= 4) {
         nextQuarter.setHours(nextQuarter.getHours()+1);
         nextQuarter.setMinutes(0,0,0);
     } else {
-        nextQuarter.setMinutes((quarterHours*15)%60,0,0);
+        nextQuarter.setMinutes((nextQuarterHours*15)%60,0,0);
     }
     var msToNextQuarter = ( nextQuarter - new Date() )
     console.log( 'Decided that the next quarter for refresh is: ' + nextQuarter )
