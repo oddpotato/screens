@@ -4,7 +4,7 @@
 # The actual kiosk script on the pis is as follows:
 #
 # #!/bin/bash
-# wget --retry-on-host-error -O kiosk2.sh raw.githubusercontent.com/nwspk/screens/master/kiosk.sh
+# wget --retry-on-host-error -O /home/pi/kiosk2.sh raw.githubusercontent.com/nwspk/screens/master/kiosk.sh
 # bash /home/pi/kiosk2.sh
 
 xset s noblank
