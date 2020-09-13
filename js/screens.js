@@ -5,6 +5,8 @@ const defaultPeriod = 10,
           { period: 5, url: "https://coronavirus.data.gov.uk/" },
           { period: 5, url: "https://coronavirus.data.gov.uk/cases?areaType=utla&areaName=Tower%20Hamlets" },
           { period: 10, url: "./dashboard.html" },
+          { period: 10, url: "./twitter.html" },
+          { period: 10, url: "./dashboard.html" },
           { period: 10, url: "./bones.html" },
           { period: 5, url: "./joe.html" },
           //"https://www.wbstack.com",
@@ -67,7 +69,7 @@ function showIframeAndScheduleNext(urlIndex) {
     iframeForUrl.style.visibility = "";
 
     var period = periodToUse(urlData);
-    if(period){
+    if(period > 0){
         setTimeout(advanceIframes, period * 1000);
     }
 }
