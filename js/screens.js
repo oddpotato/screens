@@ -30,7 +30,8 @@ setTimeout(() => {
 
 function msToNextQuarterHourForRefresh(){
     var nextQuarter = new Date();
-    if (Math.ceil(nextQuarter.getMinutes()/15) == 4) {
+    var quarterHours = Math.ceil(nextQuarter.getMinutes()/15);
+    if ( quarterHours == 4) {
         nextQuarter.setHours(nextQuarter.getHours()+1);
         nextQuarter.setMinutes(0,0,0);
     } else {
