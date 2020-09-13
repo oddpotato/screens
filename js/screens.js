@@ -1,14 +1,12 @@
 
-const defaultIndex = 0,
-      defaultPeriod = 10,
+const defaultPeriod = 10,
       urls = [
-          "./dashboard.html",
-          "https://coronavirus.data.gov.uk/",
-          "https://coronavirus.data.gov.uk/cases?areaType=utla&areaName=Tower%20Hamlets",
-          "./dashboard.html",
-          "./bones.html",
-          "./dashboard.html",
-          "./joe.html",
+          { period: 10, url: "./dashboard.html" },
+          { period: 5, url: "https://coronavirus.data.gov.uk/" },
+          { period: 5, url: "https://coronavirus.data.gov.uk/cases?areaType=utla&areaName=Tower%20Hamlets" },
+          { period: 10, url: "./dashboard.html" },
+          { period: 10, url: "./bones.html" },
+          { period: 5, url: "./joe.html" },
           //"https://www.wbstack.com",
           //"./dashboard.html",
           //"https://electiontechhandbook.uk",
@@ -48,14 +46,17 @@ function msToNextQuarterHourForRefresh(){
 
 let index = 0;
 
-function showIframe(url) {
-    var iframeForUrl = document.querySelector("iframe[src*=\""+url+"\"]");
-    var otherIframes = document.querySelectorAll("iframe:not([src*=\""+url+"\"])");
+function showIframeAndScheduleNext(urlIndex) {
+    index = urlIndex;
+    var urlData = urls[urlIndex]
+
+    var iframeForUrl = document.querySelector("iframe[src*=\""+urlData.url+"\"]");
+    var otherIframes = document.querySelectorAll("iframe:not([src*=\""+urlData.url+"\"])");
 
     // If we have not setup this iframe yet then create it
     if( iframeForUrl === null ){
         iframeForUrl = document.createElement('iframe');
-        iframeForUrl.setAttribute("src", url);
+        iframeForUrl.setAttribute("src", urlData.url);
         document.body.appendChild(iframeForUrl);
     }
 
@@ -64,42 +65,56 @@ function showIframe(url) {
         iframeToHide.style.visibility = "hidden";
     })
     iframeForUrl.style.visibility = "";
+
+    var period = periodToUse(urlData);
+    if(period){
+        setTimeout(advanceIframes, period * 1000);
+    }
 }
 
-function updateIframe() {
+function advanceIframes() {
     index = (index + 1) % urls.length;
-    showIframe(urls[index]);
+    showIframeAndScheduleNext(index);
 }
 
 function getURLParam(parameter) {
     return new URLSearchParams(window.location.search).get(parameter);
 }
 
-function initialize() {
-    let timeoutPeriod = getURLParam("period");
-    if (timeoutPeriod === null || timeoutPeriod === "") {
-        timeoutPeriod = defaultPeriod;
+function periodToUse(urlData){
+    let overridePeriod = getURLParam("period");
+    if (overridePeriod !== null && overridePeriod !== "") {
+        return overridePeriod;
     }
-    index = defaultIndex;
-    let targetURL = getURLParam("url");
-    if (targetURL === null || targetURL === "") {
-        const givenIndex = getURLParam("index");
-        if (givenIndex !== null && givenIndex !== "" && givenIndex >= 0) {
-            index = givenIndex % urls.length;
-        }
-        targetURL = urls[index];
+    if( urlData.period ){
+        return urlData.period;
     }
-    if (timeoutPeriod > 0) {
-        setInterval(updateIframe, timeoutPeriod * 1000);
-    }
-    showIframe(targetURL);
+    return defaultPeriod;
 }
 
-initialize();
+function initialUrlIndex() {
+    let givenURL = getURLParam("url");
+    if (givenURL !== null && givenURL !== "") {
+        for (var i = 0; i < urls.length; i++) {
+            if( urls[i].url == givenURL ) {
+                return i;
+            }
+        }
+    }
+
+    const givenIndex = getURLParam("index");
+    if (givenIndex !== null && givenIndex !== "" && givenIndex >= 0 && givenIndex < urls.length) {
+        return givenIndex;
+    }
+
+    return 0;
+}
+
+showIframeAndScheduleNext(initialUrlIndex());
 
 // Space advances to the next page
 document.body.onkeyup = function(e){
     if(e.keyCode == 32){
-        updateIframe();
+        advanceIframes();
     }
 }
