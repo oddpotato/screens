@@ -16,7 +16,8 @@ const $event = document.querySelector(".event"),
       $eventTime = document.querySelector(".event-time");
 
 function setEventDetails(eventObject) {
-    if (!eventIsValid(eventObject)) {
+    if (!eventObject || !eventIsValid(eventObject)) {
+        localStorage.nextEvent = JSON.stringify(null);
         $event.textContent = "not yet scheduled";
         $eventTime.textContent = "please stand by";
         return;
@@ -97,14 +98,11 @@ function setEventDetails(eventObject) {
 }
 
 async function updateEvent() {
-    const loadedNextEvent = localStorage.nextEvent && localStorage.nextEvent !== "undefined"
-        && JSON.parse(localStorage.nextEvent);
-    if (loadedNextEvent) {
-        setEventDetails(loadedNextEvent);
+    if (typeof localStorage.nextEvent !== "undefined") {
+        setEventDetails(JSON.parse(localStorage.nextEvent));
     }
 
     var jsonLocation
-    console.log(location.hostname)
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         jsonLocation = "/data/samples/upcomingEvents.json"
     } else {
