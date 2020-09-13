@@ -29,13 +29,27 @@ setTimeout(() => {
 
 let index = 0;
 
-function setIframe(url) {
-    document.querySelector("iframe").setAttribute("src", url);
+function showIframe(url) {
+    var iframeForUrl = document.querySelector("iframe[src*=\""+url+"\"]");
+    var otherIframes = document.querySelectorAll("iframe:not([src*=\""+url+"\"])");
+
+    // If we have not setup this iframe yet then create it
+    if( iframeForUrl === null ){
+        iframeForUrl = document.createElement('iframe');
+        iframeForUrl.setAttribute("src", url);
+        document.body.appendChild(iframeForUrl);
+    }
+
+    // Hide the other iframes and show the one we want to
+    otherIframes.forEach(iframeToHide => {
+        iframeToHide.style.visibility = "hidden";
+    })
+    iframeForUrl.style.visibility = "";
 }
 
 function updateIframe() {
     index = (index + 1) % urls.length;
-    setIframe(urls[index]);
+    showIframe(urls[index]);
 }
 
 function getURLParam(parameter) {
@@ -59,7 +73,7 @@ function initialize() {
     if (timeoutPeriod > 0) {
         setInterval(updateIframe, timeoutPeriod * 1000);
     }
-    setIframe(targetURL);
+    showIframe(targetURL);
 }
 
 initialize();
