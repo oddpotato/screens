@@ -3,9 +3,9 @@
 # This script is fetched at the startup of each pi (to pull updates)
 # The actual kiosk script on the pis is as follows:
 #
-# wget -O kiosk2.sh raw.githubusercontent.com/nwspk/screens/master/kiosk.sh
-# chmod +x kiosk2.sh
-# ./kiosk2.sh
+# #!/bin/bash
+# wget --retry-on-host-error -O kiosk2.sh raw.githubusercontent.com/nwspk/screens/master/kiosk.sh
+# bash /home/pi/kiosk2.sh
 
 xset s noblank
 xset s off
