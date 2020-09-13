@@ -13,3 +13,14 @@ iframe {
     width: 100%;
     height: 100%;
 }
+
+#url-footer {
+    background-color: aliceblue;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display:block;
+    z-index: -10000;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}

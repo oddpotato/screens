@@ -48,7 +48,7 @@ function msToNextQuarterHourForRefresh(){
 
 let index = 0;
 
-function showIframe(urlIndex) {
+function switchIframe(urlIndex) {
     index = urlIndex;
     var urlData = urls[urlIndex]
 
@@ -68,6 +68,9 @@ function showIframe(urlIndex) {
     })
     iframeForUrl.style.visibility = "";
 
+    // Update the url footer
+    document.getElementById("url-footer").innerHTML = urlData.url;
+
     return periodToUse(urlData);
 }
 
@@ -83,7 +86,7 @@ function scheduleNext(period){
 
 function advanceIframes() {
     index = (index + 1) % urls.length;
-    return showIframe(index);
+    return switchIframe(index);
 }
 
 function getURLParam(parameter) {
@@ -119,7 +122,7 @@ function initialUrlIndex() {
     return 0;
 }
 
-scheduleNext(showIframe(initialUrlIndex()));
+scheduleNext(switchIframe(initialUrlIndex()));
 
 // Space advances to the next page
 document.body.onkeyup = function(e){
