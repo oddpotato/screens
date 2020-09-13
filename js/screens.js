@@ -22,10 +22,10 @@ const defaultIndex = 0,
           //"./ration-club.html"
       ];
 
-// Schedule the page to refresh in an hour (ensures screens pull latest update to codebase)
+// Schedule the page to refresh in 15 mins (ensures screens pull latest update to codebase)
 setTimeout(() => {
     location.reload();
-}, 60 * 60 * 1000);
+}, 15 * 60 * 1000);
 
 let index = 0;
 
