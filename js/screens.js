@@ -22,10 +22,24 @@ const defaultIndex = 0,
           //"./ration-club.html"
       ];
 
-// Schedule the page to refresh in 15 mins (ensures screens pull latest update to codebase)
+// Schedule the page to refresh at every quarter hour
+// If the clocks are right this should mean the screens are fairly in sync
 setTimeout(() => {
     location.reload();
-}, 15 * 60 * 1000);
+}, msToNextQuarterHourForRefresh());
+
+function msToNextQuarterHourForRefresh(){
+    var nextQuarter = new Date();
+    if (Math.ceil(nextQuarter.getMinutes()/15) == 4) {
+        nextQuarter.setHours(nextQuarter.getHours()+1);
+        nextQuarter.setMinutes(0,0,0);
+    } else {
+        nextQuarter.setMinutes((quarterHours*15)%60,0,0);
+    }
+    var msToNextQuarter = ( nextQuarter - new Date() )
+    console.log( 'Decided that the next quarter for refresh is: ' + nextQuarter )
+    return msToNextQuarter
+}
 
 let index = 0;
 
