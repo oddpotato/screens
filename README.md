@@ -17,7 +17,7 @@ There are three parameters that can be used to control the screens Display:
 Note that the page reloads itself every quarter of an hour in order to pull in updates deployed via Netlify.
 
 These options can be entered into the URL as in the following examples:
-- [nwspk.github.io/screens/?url=/joe.html](https://nwspk.github.io/screens/?url=/joe.html) - loads the /joe.html first
+- [nwspk.github.io/screens/?url=./joe.html](https://nwspk.github.io/screens/?url=./joe.html) - loads the /joe.html first
 - [nwspk.github.io/screens/?index=5](https://nwspk.github.io/screens/?index=5) - loads the 5th page in the hardcoded URL list
 - [nwspk.github.io/screens/?index=5&period=0](https://nwspk.github.io/screens/?index=5&period=0) - loads the 5th page in the hardcoded URL list and never changes
 - [nwspk.github.io/screens/?period=30](https://nwspk.github.io/screens/?period=30) - loads the 0th page in the hardcoded URL list and cycles to the next item in the list every 30 seconds
