@@ -3,11 +3,14 @@ const defaultPeriod = 10,
       urls = [
           //{ period: 10, url: "./dashboard.html" },
           //{ period: 10, url: "./cal.html" },
+          { period: 10, url: "https://addshore.com/NwspkChristmasMessage.png" },// christmas
           { period: 7, url: "https://coronavirus.data.gov.uk/" },
           { period: 7, url: "https://coronavirus.data.gov.uk/details/cases?areaType=ltla&areaName=Tower%20Hamlets" },
           //{ period: 10, url: "./dashboard.html" },
+          { period: 10, url: "https://addshore.com/NwspkChristmasMessage.png" },// christmas
           { period: 10, url: "./twitter.html" },
           //{ period: 10, url: "./dashboard.html" },
+          { period: 10, url: "https://addshore.com/NwspkChristmasMessage.png" },// christmas
           { period: 5, url: "./bones.html" },
           { period: 5, url: "./joe.html" },
           //"https://www.wbstack.com",
