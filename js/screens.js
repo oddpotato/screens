@@ -1,11 +1,10 @@
 
 const defaultPeriod = 10,
       urls = [
-          //{ period: 10, url: "./dashboard.html" },
-          //{ period: 10, url: "./cal.html" },
-          { period: 7, url: "https://coronavirus.data.gov.uk/" },
-          //{ period: 7, url: "https://coronavirus.data.gov.uk/details/cases?areaType=ltla&areaName=Tower%20Hamlets" },
-          //{ period: 10, url: "./dashboard.html" },
+          { period: 10, url: "./dashboard.html" },
+          { period: 10, url: "./cal.html" },
+          { period: 10, url: "https://coronavirus.data.gov.uk/" },
+          { period: 10, url: "./dashboard.html" },
           { period: 10, url: "./twitter.html" },
           //{ period: 10, url: "./dashboard.html" },
           { period: 5, url: "./bones.html" },
